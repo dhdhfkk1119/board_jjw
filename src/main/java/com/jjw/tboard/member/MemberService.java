@@ -18,13 +18,22 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final ProfileUploadService profileUploadService;
 
     @Transactional
     public void save(MemberRequest.SaveDTO saveDTO) {
         String encodedPassword = passwordEncoder.encode(saveDTO.getPassword());
-        Member member = saveDTO.toEntity();
-        member.setPassword(encodedPassword);
-        memberRepository.save(member);
+
+
+        try {
+            String newImagePath = profileUploadService.uploadProfileImage(saveDTO.getProfileImage());
+            Member member = saveDTO.toEntity(newImagePath);
+            member.setPassword(encodedPassword);
+            memberRepository.save(member);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     // 아이디 중복 검사

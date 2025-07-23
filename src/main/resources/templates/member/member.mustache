@@ -151,12 +151,15 @@
         <a href="/member/save-form">회원가입</a>
     </div>
 
-    <form action="/member/save" method="post">
+    <form action="/member/save" method="post" enctype="multipart/form-data">
         <!-- 회원가입 박스 -->
         <div class="signup-container">
             <div class="signup-content">
                 <!-- 오른쪽: 입력 폼 -->
                 <div class="right-side">
+                    <div class="">
+                        <input type="file" name="profileImage">
+                    </div>
                     <div class="input-group">
                         <label for="memberName">회원 이름</label>
                         <input type="text" name="memberName" id="memberName" placeholder="회원 이름을 입력하세요">
@@ -252,7 +255,7 @@
             </div>
 
             <!-- 하단 버튼 -->
-            <button class="signup-button">회원가입</button>
+            <button class="signup-button" type="submit">회원가입</button>
         </div>
     </form>
 </div>

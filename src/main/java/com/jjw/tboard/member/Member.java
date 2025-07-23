@@ -30,7 +30,7 @@ public class Member {
     private String addressDefault; // 기본주소
     private String addressDetail; // 상세 주소
     private LocalDate brithDay;
-    private String profileImage = "basic.png";
+    private String profileImage;
     private String phoneNumber;
 
     @CreationTimestamp

@@ -49,11 +49,6 @@ public class BoardService {
         return boardRepository.findById(boardIdx).orElseThrow(() -> new Exception404("해당 게시판을 찾을 수 없습니다"));
     }
 
-    public boolean isBoardOwner(Long boardId, Long userId) {
-        Board board = findById(boardId);
-        return board.isOwner(userId); // Board 내부에서 member.getId() == userId 확인
-    }
-
     @Transactional
     public void updateBoard(Long boardIdx, UpdateDTO dto, Long memberId) {
         Board board = boardRepository.findById(boardIdx)
@@ -72,5 +67,11 @@ public class BoardService {
         if(!board.isOwner(userId)) {
             throw new Exception403("본인 게시글만 수정할 수 있습니다.");
         }
+    }
+
+    // 머스테치에서 누가 작성했는지 검사 하기 위함
+    public boolean isBoardOwner(Long boardId, Long userId) {
+        Board board = findById(boardId);
+        return board.isOwner(userId); // Board 내부에서 member.getId() == userId 확인
     }
 }

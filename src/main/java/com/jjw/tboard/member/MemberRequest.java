@@ -48,13 +48,15 @@ public class MemberRequest {
         @Pattern(regexp = "010", message = "전화번호는 010만 입력 가능합니다.")
         private String phone1;
 
+        MultipartFile profileImage;
+
         @NotBlank(message = "전화번호 앞 4자리를 입력해주세요")
         private String phone2;
 
         @NotBlank(message = "전화번호 뒷 4자리를 입력해주세요")
         private String phone3;
 
-        public Member toEntity(){
+        public Member toEntity(String profileImage){
             String phoneNumber = phone1 + phone2 + phone3;
 
             return Member.builder()
@@ -65,8 +67,8 @@ public class MemberRequest {
                     .addressNumber(this.addressNumber)
                     .addressDefault(this.addressDefault)
                     .addressDetail(this.addressDetail)
-                    .profileImage("basic.png")
                     .phoneNumber(phoneNumber)
+                    .profileImage(profileImage)
                     .brithDay(this.brithDay)
                     .build();
                     

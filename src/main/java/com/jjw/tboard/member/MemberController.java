@@ -74,7 +74,6 @@ public class MemberController {
             model.addAttribute("errors", errors);
             return "member/member";
         }
-
         // 정상 저장
         memberService.save(saveDTO);
         return "redirect:/";

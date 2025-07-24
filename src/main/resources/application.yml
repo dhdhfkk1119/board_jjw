@@ -1,4 +1,6 @@
 server:
+  tomcat:
+    max-part-count: 20
   servlet:
     encoding:
       charset: utf-8
